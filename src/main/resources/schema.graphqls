@@ -3,11 +3,12 @@ schema {
   mutation: Mutation
 }
 
-type Query {
-  allLinks: [Link]
+type Query {  
+  allLinks(filter: LinkFilter, skip: Int = 0, first: Int = 0): [Link]
 }
 
 type Link {
+  id: ID!
   url: String!
   description: String!
 }
@@ -16,3 +17,7 @@ type Mutation {
   createLink(url: String!, description: String!): Link
 }
 
+input LinkFilter {
+    description_contains: String
+    url_contains: String
+}
